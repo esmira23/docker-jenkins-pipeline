@@ -1,1 +1,1 @@
-# docker-jenkins-pipeline
+# migrate create -ext sql -dir pkg/database/migration -seq init_schema

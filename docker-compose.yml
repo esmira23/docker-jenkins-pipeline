@@ -1,0 +1,34 @@
+version: "3.8"
+
+volumes:
+  mariadb_data:
+
+services:
+  app:
+    container_name: tracking-application
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    # environment:
+    #   SPRING_DATASOURCE_URL: jdbc:mysql://mariadb/jiraproject??useUnicode=yes&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb:10.4
+    container_name: mariadb
+    ports:
+      - 3306:3306
+    volumes: 
+      - ./mariadb.sql:/docker-entrypoint-initdb.d/mariadb.sql
+      - mariadb_data:/var/lib/mysql
+      # - ./dev/mariadb:/docker-entrypoint-initdb.d
+    environment: 
+      - MYSQL_ROOT_PASSWORD=0721
+      - MYSQL_DATABASE=jiraproject
+      # - MYSQL_USER=esmira
+      # - MYSQL_PASSWORD=secret
+    restart: unless-stopped
+      # - MYSQL_HOST_AUTH_METHOD:trust
