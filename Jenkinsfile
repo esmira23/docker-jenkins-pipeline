@@ -1,5 +1,5 @@
 pipeline{
-    agent { lable 'agent' }
+    agent { label 'agent' }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('')
     }
