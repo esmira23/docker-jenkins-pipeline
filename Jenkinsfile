@@ -1,8 +1,8 @@
 pipeline{
     agent { label 'agent' }
-    environment {
-        DOCKERHUB_CREDENTIALS = credentials('')
-    }
+    // environment {
+    //     DOCKERHUB_CREDENTIALS = credentials('')
+    // }
     stages{
         stage("Clone"){
             steps {
