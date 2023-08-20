@@ -38,7 +38,7 @@ pipeline{
             steps{
                 sh '''
                 ssh user@remote-vm "docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW 
-                docker pull esmira/docker-jenkins-pipeline:latest"
+                docker pull esmira23/docker-jenkins-pipeline:latest"
                 '''
             }
         }
