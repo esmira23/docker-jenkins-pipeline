@@ -37,7 +37,7 @@ pipeline{
         stage("Login and Pull on VM"){
             steps{
                 sh '''
-                ssh user@remote-vm "docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW 
+                ssh user@vm-remote "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin 
                 docker pull esmira23/docker-jenkins-pipeline:latest"
                 '''
             }
