@@ -18,7 +18,7 @@ pipeline{
         }
         stage("Build"){
             steps{
-                sh 'docker build -t esmira/docker-jenkins-pipeline:latest .'
+                sh 'docker build -t esmira23/docker-jenkins-pipeline:latest .'
             }
         }
         // stage("Test"){
@@ -26,12 +26,12 @@ pipeline{
         // }
         stage('Login') {
             steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin docker.io'
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
         stage("Push"){
             steps{
-                sh 'docker push esmira/docker-jenkins-pipeline:latest'
+                sh 'docker push esmira23/docker-jenkins-pipeline:latest'
             }
         }
         stage("Login and Pull on VM"){
