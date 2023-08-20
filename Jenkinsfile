@@ -37,7 +37,7 @@ pipeline{
         stage("Login and Pull on VM"){
             steps{
                 sh '''
-                ssh -i jenkins-agent.pem ec2-user@16.170.203.107 "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin &&
+                ssh -i /home/jenkins/jenkins-agent.pem ec2-user@16.170.203.107 "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin &&
                 docker pull esmira23/docker-jenkins-pipeline:latest"
                 '''
             }
@@ -45,7 +45,7 @@ pipeline{
         stage("Deploy"){
             steps{
                 // Assume you have SSH access to the other VM
-                sh 'ssh -i jenkins-agent.pem ec2-user@16.170.203.107 "docker-compose up -d"'
+                sh 'ssh -i /home/jenkins/jenkins-agent.pem ec2-user@16.170.203.107 "docker-compose up -d"'
             }
         }
     }
