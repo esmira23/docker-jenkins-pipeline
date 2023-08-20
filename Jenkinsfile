@@ -18,7 +18,7 @@ pipeline{
         }
         stage("Build"){
             steps{
-                sh 'docker-compose build -t esmira/docker-jenkins-pipeline:latest'
+                sh 'docker build -t esmira/docker-jenkins-pipeline:latest .'
             }
         }
         // stage("Test"){
