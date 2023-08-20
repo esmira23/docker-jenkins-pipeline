@@ -51,11 +51,9 @@ pipeline{
     }
     post{
         always{
-            sh '''
-            docker logout
-            docker compose down --remove-orphans -v
-            docker compose ps
-            '''
+            sh 'docker logout'
+            sh 'docker compose down --remove-orphans -v'
+            sh 'docker compose ps'
         }
     }
 }
