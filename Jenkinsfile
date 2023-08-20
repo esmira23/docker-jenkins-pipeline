@@ -1,8 +1,8 @@
 pipeline{
     agent { label 'agent' }
-    // environment {
-    //     DOCKERHUB_CREDENTIALS = credentials('')
-    // }
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('esmira23-dockerhub')
+    }
     stages{
         stage("Clone"){
             steps {
@@ -57,6 +57,3 @@ pipeline{
         }
     }
 }
-
-docker login -u esmira23
-dckr_pat_fhVg0VzdXKvXmGR83kn_GXoHc6A
