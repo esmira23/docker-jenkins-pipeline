@@ -50,7 +50,6 @@ pipeline{
     post{
         always{
             sh 'docker logout'
-            sh 'docker image prune -a'
         }
     }
 }
