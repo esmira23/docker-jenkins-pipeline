@@ -37,8 +37,8 @@ pipeline{
         stage("Copy files"){
             steps{
                 sh '''
-                scp -o ~/docker-jenkins-pipeline/docker-compose.yml esmira@192.168.138.133:/home/esmira/docker-jenkins-pipeline
-                scp -o ~/docker-jenkins-pipeline/mariadb.sql esmira@192.168.138.133:/home/esmira/docker-jenkins-pipeline
+                scp docker-compose.yml esmira@192.168.138.133:/home/esmira/docker-jenkins-pipeline
+                scp mariadb.sql esmira@192.168.138.133:/home/esmira/docker-jenkins-pipeline
                 '''
             }
         }
