@@ -44,10 +44,9 @@ pipeline{
         }
         stage("Deploy"){
             steps{
-                sh 'ssh esmira@192.168.138.133 "docker compose up -d -f ~/docker-jenkins-pipeline/docker-compose.yml --build"'
+                sh 'ssh esmira@192.168.138.133 "docker compose -f ~/docker-jenkins-pipeline/docker-compose.yml up -d --build"'
             }
-        }
-    }
+        }    }
     post{
         always{
             sh 'docker logout'
