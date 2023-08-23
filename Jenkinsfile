@@ -34,26 +34,24 @@ pipeline{
                 sh 'docker push esmira23/docker-jenkins-pipeline:latest'
             }
         }
-        stage("Login and Pull on VM"){
+        stage("Copy files"){
             steps{
                 sh '''
-                ssh -i /home/jenkins/jenkins-agent.pem ec2-user@16.170.203.107 "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin &&
-                docker pull esmira23/docker-jenkins-pipeline:latest"
+                scp -o ~/docker-jenkins-pipeline/docker-compose.yml esmira@192.168.138.133:/home/esmira/docker-jenkins-pipeline
+                scp -o ~/docker-jenkins-pipeline/mariadb.sql esmira@192.168.138.133:/home/esmira/docker-jenkins-pipeline
                 '''
             }
         }
         stage("Deploy"){
             steps{
-                // Assume you have SSH access to the other VM
-                sh 'ssh -i /home/jenkins/jenkins-agent.pem ec2-user@16.170.203.107 "docker-compose up -d"'
+                sh 'ssh esmira@192.168.138.133 "docker compose up -d -f ~/docker-jenkins-pipeline/docker-compose.yml --build"'
             }
         }
     }
     post{
         always{
             sh 'docker logout'
-            sh 'docker compose down --remove-orphans -v'
-            sh 'docker compose ps'
+            sh 'docker image prune -a'
         }
     }
 }

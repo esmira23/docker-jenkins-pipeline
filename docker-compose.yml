@@ -5,14 +5,13 @@ volumes:
 
 services:
   app:
+    image: esmira23/docker-jenkins-pipeline:latest
     container_name: tracking-application
-    build:
-      context: .
-      dockerfile: Dockerfile
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
     ports:
       - 8080:8080
-    # environment:
-    #   SPRING_DATASOURCE_URL: jdbc:mysql://mariadb/jiraproject??useUnicode=yes&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
     depends_on:
       - mariadb
 
@@ -24,7 +23,6 @@ services:
     volumes: 
       - ./mariadb.sql:/docker-entrypoint-initdb.d/mariadb.sql
       - mariadb_data:/var/lib/mysql
-      # - ./dev/mariadb:/docker-entrypoint-initdb.d
     environment: 
       - MYSQL_ROOT_PASSWORD=0721
       - MYSQL_DATABASE=jiraproject
