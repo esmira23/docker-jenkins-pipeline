@@ -21,10 +21,7 @@ pipeline{
                 sh 'docker build -t esmira23/docker-jenkins-pipeline:latest .'
             }
         }
-        // stage("Test"){
-        //     steps{}
-        // }
-        stage('Login') {
+        stage('Docker Hub Login') {
             steps {
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
@@ -46,10 +43,16 @@ pipeline{
             steps{
                 sh 'ssh esmira@192.168.138.133 "docker compose -f ~/docker-jenkins-pipeline/docker-compose.yml up -d --build"'
             }
-        }    }
+        }  
+    }
     post{
         always{
-            sh 'docker logout'
+            sh ''' 
+            docker logout
+            docker rmi esmira23/docker-jenkins-pipeline:latest
+            ssh esmira@192.168.138.133 "rm ~/docker-jenkins-pipeline/docker-compose.yml"
+            ssh esmira@192.168.138.133 "rm ~/docker-jenkins-pipeline/mariadb.sql"
+            '''
         }
     }
 }
