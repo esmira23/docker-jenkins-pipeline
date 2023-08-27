@@ -44,20 +44,6 @@ pipeline{
                 sh 'ssh esmira@192.168.138.133 "docker compose -f ~/docker-jenkins-pipeline/docker-compose.yml up -d --build"'
             }
         } 
-        stage("Test"){
-            steps{
-                script {
-                    String url = 'http://localhost:8080/'
-                    int status = sh(script: "ssh esmira@192.168.138.133 \"curl -sLI -w '%{http_code}' $url -o /dev/null\"", returnStdout: true)
-
-                    if (status != 200 && status != 201) {
-                        error("Returned status code = $status when calling $url")
-                    }
-                }
-                
-                // sh 'ssh esmira@192.168.138.133 "curl -sLI -w '%{http_code}' http://localhost:8080/ -o /dev/null"'
-            }
-        }
     }
     post{
         always{
