@@ -43,13 +43,21 @@ pipeline{
             steps{
                 sh 'ssh esmira@192.168.138.133 "docker compose -f ~/docker-jenkins-pipeline/docker-compose.yml up -d --build"'
             }
-        }  
+        } 
+        stage("Test"){
+            steps{
+                script {
+                    final String url = "http://192.168.138.133:8080/"
+                    final String http_code = sh(script: "ssh esmira@192.168.138.133 \"curl -s -o /dev/nul -w \'%{http_code}\'\"", returnStdout: true).trim()
+                    echo http_code
+                }
+            }
+        }
     }
     post{
         always{
             sh ''' 
             docker logout
-            docker rmi esmira23/docker-jenkins-pipeline:latest
             ssh esmira@192.168.138.133 "rm ~/docker-jenkins-pipeline/docker-compose.yml"
             ssh esmira@192.168.138.133 "rm ~/docker-jenkins-pipeline/mariadb.sql"
             '''
