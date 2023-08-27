@@ -24,9 +24,8 @@ services:
       - ./mariadb.sql:/docker-entrypoint-initdb.d/mariadb.sql
       - mariadb_data:/var/lib/mysql
     environment: 
-      - MYSQL_ROOT_PASSWORD=0721
-      - MYSQL_DATABASE=jiraproject
-      # - MYSQL_USER=esmira
-      # - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     restart: unless-stopped
-      # - MYSQL_HOST_AUTH_METHOD:trust
