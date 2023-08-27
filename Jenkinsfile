@@ -46,11 +46,7 @@ pipeline{
         } 
         stage("Test"){
             steps{
-                script {
-                    final String url = "http://192.168.138.133:8080/"
-                    final String http_code = sh(script: "ssh esmira@192.168.138.133 \"curl -s -o /dev/nul -w \'%{http_code}\' $url\"", returnStdout: true).trim()
-                    echo http_code
-                }
+                sh 'ssh esmira@192.168.138.133 "curl -sLI -w '%{http_code}' http://localhost:8080/ -o /dev/null"'
             }
         }
     }
