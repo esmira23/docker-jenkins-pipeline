@@ -8,9 +8,3 @@ FROM tomcat:9.0.48-jdk11-openjdk
 COPY --from=maven_build /app/target/finalProjectMFW.war /usr/local/tomcat/webapps/ROOT.war
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
-
-# RUN mvn clean install
-# FROM openjdk:11
-# COPY --from=maven_build /app/target/finalProjectMFW.war /app/finalProjectMFW.war
-# EXPOSE 8080 
-# ENTRYPOINT ["java", "-jar", "/app/finalProjectMFW.war"]
