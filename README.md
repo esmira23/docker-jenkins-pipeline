@@ -4,18 +4,18 @@ This Repository Contains Codebase For Project Tracking Application ( JIRA Clone 
 
 Modules:
 
-1. Admin Module
-  a. Admin Login
-  b. Add/Update/Delete project details
-  c. Assign project reporter & assignee (candidate) 
-  d. Change project progress status (TO DO/IN-PROGRESS/COMPLETE
-  e. Set Project Priority & Difficulty levels
+1. Admin Module:
+    - Admin Login
+    - Add/Update/Delete project details
+    - Assign project reporter & assignee (candidate) 
+    - Change project progress status (TO DO/IN-PROGRESS/COMPLETE)
+    - Set Project Priority & Difficulty levels
 
-2. User Module
-  a. User Registration and Login
-  b. Update Profile
-  c. View assigned projects
-  d. Add comments
+2. User Module:
+    - User Registration and Login
+    - Update Profile
+    - View assigned projects
+    - Add comments
 
 # Technologies Used
 
